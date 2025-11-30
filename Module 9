@@ -1,0 +1,68 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Item {
+public:
+    string name;
+    int quantity;
+};
+
+void displayInventory(Item items[], int size) {
+    cout << "\n=== Inventory ===\n";
+    for (int i = 0; i < size; i++) {
+        cout << "Item " << (i + 1) << ": "
+             << "Name = " << items[i].name
+             << ", Quantity = " << items[i].quantity << "\n";
+    }
+}
+
+void searchItemByName(Item items[], int size, const string &searchName) {
+    bool found = false;
+    for (int i = 0; i < size; i++) {
+        if (items[i].name == searchName) {
+            cout << "Found item: " << items[i].name
+                 << " — Quantity: " << items[i].quantity << "\n";
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        cout << "Item with name \"" << searchName << "\" not found in inventory.\n";
+    }
+}
+
+int main() {
+    const int SIZE = 5;
+    Item inventory[SIZE];
+
+    cout << "Enter information for " << SIZE << " items:\n";
+    for (int i = 0; i < SIZE; i++) {
+        cout << "Item " << (i + 1) << " name: ";
+        getline(cin, inventory[i].name);
+        if (inventory[i].name.empty()) {
+            // If previous extraction left newline, prompt again
+            i--;
+            continue;
+        }
+        cout << "Item " << (i + 1) << " quantity: ";
+        cin >> inventory[i].quantity;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear newline
+    }
+
+    displayInventory(inventory, SIZE);
+
+    cout << "\nWould you like to search for an item by name? (y/n): ";
+    char choice;
+    cin >> choice;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    if (choice == 'y' || choice == 'Y') {
+        cout << "Enter the item name to search: ";
+        string targetName;
+        getline(cin, targetName);
+        searchItemByName(inventory, SIZE, targetName);
+    }
+
+    return 0;
+}
