@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Item {
+    string name;
+    int id;
+};
+
+int binarySearch(Item items[], int size, int targetID) {
+    int left = 0;
+    int right = size - 1;
+
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        if (items[mid].id == targetID)
+            return mid;
+        else if (items[mid].id < targetID)
+            left = mid + 1;
+        else
+            right = mid - 1;
+    }
+    return -1; // Not found
+}
+
+int main() {
+    const int SIZE = 100;
+    Item* items = new Item[SIZE];  // Dynamically allocate array
+
+    for (int i = 0; i < SIZE; ++i) {
+        items[i].id = 1000 + i; // Unique ID
+        items[i].name = "Item_" + to_string(i + 1); // Sorted by name
+    }
+
+    cout << "=== Item Search Program ===\n";
+    cout << "There are " << SIZE << " items stored (sorted by name, searched by ID).\n";
+
+    int searchID;
+    cout << "Enter an item ID to search for (1000 - 1099): ";
+    cin >> searchID;
+
+    int index = binarySearch(items, SIZE, searchID);
+
+    if (index != -1)
+        cout << "Item found!\nName: " << items[index].name << "\nID: " << items[index].id << endl;
+    else
+        cout << "Item with ID " << searchID << " not found.\n";
+
+    // Free allocated memory
+    delete[] items;
+
+    return 0;
+}
