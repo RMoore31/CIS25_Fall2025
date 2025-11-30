@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+
+void addNumber(int &total);
+void viewTotal(int total);
+void exitProgram();
+
+int main () {
+  int choice; 
+  int total = 0;
+
+do {
+  cout << "1. Add a number\n";
+  cout << "2. View total\n";
+  cout << 3. Exit\n";
+  cout << "Enter your choice (1-3): ";
+  cin >> choice;
+
+  switch (choice) {
+    case 1:
+        addNumber(total);
+        break;
+    case 2:
+        viewTotal(total);
+        break;
+    case 3: 
+        exitProgram();
+        break;
+    defualt:
+  cout << "Invalid choice! Please try again.\n";
+}
+} while (choice != 3);
+return 0;
+
+}
+
+
+void viewTotal(int total) {
+  int num;
+  cout << "Enter a number to add: ";
+  cin >> num;
+  total += num;
+  cout << num << " added to total.\n';
+
+void viewtotal(int total) {
+cout << "Current total is: " << total << endl;
+}
+
+void exitProgram() {
+  cout << "Exiting program... Goodbye!\n";
+}
