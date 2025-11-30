@@ -1,0 +1,52 @@
+#include <iostream>   // For input and output
+#include <fstream>    // For file handling
+#include <string>     // For using string type
+using namespace std;
+
+class Item {
+public:
+    string name;
+    int quantity;
+
+    void saveToFile() {
+        ofstream file("items.txt");  // Open file for writing
+        if (file.is_open()) {
+            file << name << ", " << quantity << endl;
+            file.close();
+            cout << "Item saved to file successfully.\n";
+        } else {
+            cout << "Error: Unable to open file for writing.\n";
+        }
+    }
+
+    void loadFromFile() {
+        ifstream file("items.txt");  // Open file for reading
+        string line;
+
+        if (file.is_open()) {
+            cout << "\n--- Item Data from File ---\n";
+            while (getline(file, line)) {
+                cout << line << endl;
+            }
+            file.close();
+        } else {
+            cout << "Error: Unable to open file for reading.\n";
+        }
+    }
+};
+
+int main() {
+    Item myItem;
+
+    // Assign values to members
+    myItem.name = "Notebook";
+    myItem.quantity = 5;
+
+    // Save item data to file
+    myItem.saveToFile();
+
+    // Load and display data from file
+    myItem.loadFromFile();
+
+    return 0;
+}
