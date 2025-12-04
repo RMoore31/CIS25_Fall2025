@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Product {
+private:
+int id;
+string name;
+double price;
+
+public:
+Product(int pid, string pname, double pprice) {
+id = pid;
+name = pname;
+price = pprice;
+cout << "Product constructor called." << endl;
+}
+
+Product() {
+cout << "Product destructor called for: " << name << endl;
+}
+
+void printDetails() const {
+cout << "Product ID: " << id << endl;
+cout << "Product Name: " << name << endl;
+cout << "Product Price: $" << price << endl;
+}
+};
+
+int main() {
+Product item(101, "Wireless Mouse", 29.99);
+
+item.printDetails();
+
+return 0;
+}
