@@ -6,15 +6,12 @@ User.h
 #include <iostream>
 using namespace std;
 
-// Base class
 class User {
 public:
-    // Virtual method (can be overridden)
     virtual void accessLevel() const {
         cout << "Access Level: Basic User" << endl;
     }
 
-    // Virtual destructor (good practice for inheritance)
     virtual ~User() {}
 };
 
@@ -27,10 +24,9 @@ Employee.h
 
 #include "User.h"
 
-// Derived class from User
 class Employee : public User {
 public:
-    // Override accessLevel()
+
     void accessLevel() const override {
         cout << "Access Level: Employee" << endl;
     }
@@ -45,10 +41,8 @@ InventoryManager.h
 
 #include "Employee.h"
 
-// Derived class from Employee
 class InventoryManager : public Employee {
 public:
-    // Override accessLevel()
     void accessLevel() const override {
         cout << "Access Level: Inventory Manager (Full Access)" << endl;
     }
@@ -61,13 +55,10 @@ main.cpp
 #include "InventoryManager.h"
 
 int main() {
-    // Create an object of InventoryManager
     InventoryManager manager;
 
-    // Demonstrate which version executes
     manager.accessLevel();  // Calls InventoryManager version
 
-    // Optional: use a pointer to show polymorphism
     User* userPtr = &manager;
     userPtr->accessLevel();  // Still calls InventoryManager version (dynamic dispatch)
 
